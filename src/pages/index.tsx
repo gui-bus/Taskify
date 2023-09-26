@@ -1,22 +1,17 @@
-import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
 import heroGif from "../../public/assets/tasksHero.gif";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
-
 export default function Home() {
   return (
-    <div
-      className={`${montserrat.className} w-full max-w-7xl mx-auto flex items-center justify-center p-5`}
-    >
+    <div className="w-full max-w-7xl mx-auto flex items-center justify-center p-5">
       <Head>
         <title>Taskify | Organize suas tarefas de forma eficiente</title>
         <meta name="description" content="To-do list" />
         <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center select-none">
+      <main className="flex flex-col items-center justify-center select-none mt-10 text-center">
         <div className="flex flex-col items-center justify-center">
           <Image
             className="my-2 w-72 md:w-96 h-auto"

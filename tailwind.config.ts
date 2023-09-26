@@ -9,8 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        taskify: "#c5ff38"
-      }
+        taskify: "#c5ff38",
+        taskifyHover: "#deff38",
+        discord: "#7289da",
+        twitch: "#65459b",
+        gitlab: "#fc6d26",
+        spotify: "#1db954",
+      },
     },
   },
   plugins: [],
