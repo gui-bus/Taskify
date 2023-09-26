@@ -1,10 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
+import Head from "next/head";
 
 const CustomErrorPage = () => {
   return (
     <div className="flex w-full h-screen justify-center items-center flex-col text-white">
+       <Head>
+        <title>Taskify | Pagina não encontrada</title>
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+      </Head>
       <Link href="/">
         <Image
           className="w-72 md:w-96 h-auto"

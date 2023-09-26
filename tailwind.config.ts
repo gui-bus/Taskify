@@ -16,6 +16,9 @@ const config: Config = {
         gitlab: "#fc6d26",
         spotify: "#1db954",
       },
+      fontSize: {
+        xxs: "10px",
+      },
     },
   },
   plugins: [],
