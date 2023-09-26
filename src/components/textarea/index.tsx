@@ -4,7 +4,7 @@ export function Textarea({ ...rest }: HTMLProps<HTMLTextAreaElement>) {
   return (
     <textarea
       id="textarea"
-      className="w-full resize-none h-40 rounded-md outline-none p-2 placeholder:text-center placeholder:my-auto"
+      className="w-full h-28 resize-none rounded-md outline-none p-2 text-sm"
       {...rest}
     ></textarea>
   );

@@ -15,7 +15,7 @@ export function Header() {
   };
 
   return (
-    <header className="w-full max-w-[48.75] h-20 md:h-20 flex items-center justify-around mx-auto px-8 md:px-2 py-2 relative bg-neutral-800  md:bg-transparent mb-5">
+    <header className="w-full max-w-[48.75] h-20 md:h-20 flex items-center justify-around mx-auto px-8 md:px-2 py-2 relative bg-neutral-800  md:bg-transparent mb-5 select-none">
       <div className="flex items-center">
         <Link href="/">
           <Image
