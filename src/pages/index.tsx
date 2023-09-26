@@ -14,7 +14,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center select-none mt-10 text-center">
         <div className="flex flex-col items-center justify-center">
           <Image
-            className="my-2 w-72 md:w-96 h-auto"
+            className="my-2 w-72 md:w-96 h-auto flex"
             src={heroGif}
             alt="Tasks"
             priority

@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { signIn, getSession } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import {
   BiLogoDiscord,
@@ -16,15 +15,6 @@ import { SiGitlab } from "react-icons/si";
 import logo from "../../public/assets/logo.png";
 
 export default function SignIn() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session) {
-      router.push("/");
-    }
-  }, [session, router]);
-
   const handleGoogleSignIn = () => {
     signIn("google", { callbackUrl: "/" });
   };
@@ -118,3 +108,20 @@ export default function SignIn() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if(session?.user){
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {},
+  };
+};

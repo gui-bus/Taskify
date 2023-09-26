@@ -1,31 +1,41 @@
+import { useState } from "react";
+import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
-
 import Image from "next/image";
 import logo from "../../../public/assets/logo.png";
-import Link from "next/link";
-
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { FiLogIn, FiLogOut, FiMenu } from "react-icons/fi";
 import { CgSpinner } from "react-icons/cg";
 
 export function Header() {
   const { data: session, status } = useSession();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <header className="w-full h-20 flex items-center justify-center px-5 py-2 bg-transparent">
-      <section className="px-2 w-full max-w-2xl flex items-center justify-between">
-        <nav className="flex items-center justify-center gap-2 text-sm">
-          <Link href="/">
-            <Image src={logo} alt="Taskify" priority className="w-36 h-auto" />
+    <header className="w-full max-w-[48.75] h-20 md:h-20 flex items-center justify-around mx-auto px-8 md:px-2 py-2 relative bg-neutral-800  md:bg-transparent mb-5">
+      <div className="flex items-center">
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="Taskify"
+            priority
+            className="w-36 h-auto"
+          />
+        </Link>
+      </div>
+
+      <div className="md:flex items-center space-x-2 hidden">
+        {session?.user && (
+          <Link
+            href="/dashboard"
+            className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10 text-sm"
+          >
+            Dashboard
           </Link>
-          {session?.user && (
-            <Link
-              href="/dashboard"
-              className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10"
-            >
-              Dashboard
-            </Link>
-          )}
-        </nav>
+        )}
 
         {status === "loading" ? (
           <div className="animate-spin text-white">
@@ -46,7 +56,55 @@ export function Header() {
             Login <FiLogIn size={24} />
           </button>
         )}
-      </section>
+      </div>
+
+      {/* Mobile menu button or Login button */}
+      <div className="md:hidden">
+        {session ? (
+          <button className="text-white text-2xl" onClick={toggleMobileMenu}>
+            <FiMenu size={28}/>
+          </button>
+        ) : (
+          <button
+            className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10 text-sm"
+            onClick={() => signIn()}
+          >
+            Login <FiLogIn size={24} />
+          </button>
+        )}
+      </div>
+
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-[4.9rem] left-0 w-full bg-neutral-800 py-2 rounded-b-3xl">
+          <div className="flex items-center justify-center gap-2">
+            {session?.user && (
+              <Link
+                href="/dashboard"
+                className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10 text-sm" onClick={toggleMobileMenu}
+              >
+                Dashboard
+              </Link>
+            )}
+            {session && (
+              <button
+                className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10 text-sm"
+                onClick={() => signOut()}
+              >
+                Logout <FiLogOut size={24} />
+              </button>
+            )}
+            {!session && (
+              <button
+                className="text-white flex items-center justify-center gap-2 font-medium px-3 py-2 rounded-full transition-all duration-300 ease-linear hover:bg-neutral-300/10 text-sm"
+                onClick={() => signIn()}
+              >
+                Login <FiLogIn size={24} />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
