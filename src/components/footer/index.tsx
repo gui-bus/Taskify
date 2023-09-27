@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer className="bg-zinc-800 md:bg-transparent p-4 text-white rounded-tl-3xl rounded-tr-3xl">
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-around gap-5">
-        <p>
+        <p className="text-center">
           &copy; {new Date().getFullYear()} Taskify. Todos os direitos
           reservados.
         </p>
