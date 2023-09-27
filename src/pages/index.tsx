@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import heroGif from "../../public/assets/tasksHero.gif";
+import hero from "../../public/assets/hero.png";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
@@ -24,7 +24,7 @@ export default function Home({ tasks, comments }: HomeProps) {
         <div className="flex flex-col items-center justify-center">
           <Image
             className="my-2 w-64 h-auto flex"
-            src={heroGif}
+            src={hero}
             alt="Tasks"
             priority
           />
