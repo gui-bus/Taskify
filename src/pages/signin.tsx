@@ -43,7 +43,6 @@ export default function SignIn() {
     <div className="w-full max-w-xl mx-auto flex justify-center items-center h-screen">
       <Head>
         <title>Taskify | Login</title>
-        <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
       </Head>
       <section className="flex flex-col items-center justify-center text-white w-full px-2">
         <Link href="/">

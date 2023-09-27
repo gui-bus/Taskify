@@ -1,8 +1,17 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import heroGif from "../../public/assets/tasksHero.gif";
 
-export default function Home() {
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebaseConnection";
+
+interface HomeProps {
+  tasks: number;
+  comments: number;
+}
+
+export default function Home({ tasks, comments }: HomeProps) {
   return (
     <div className="w-full max-w-7xl mx-auto flex items-center justify-center p-5">
       <Head>
@@ -14,7 +23,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center select-none mt-10 text-center">
         <div className="flex flex-col items-center justify-center">
           <Image
-            className="my-2 w-72 md:w-96 h-auto flex"
+            className="my-2 w-64 h-auto flex"
             src={heroGif}
             alt="Tasks"
             priority
@@ -32,10 +41,10 @@ export default function Home() {
         <div className="my-5 w-full">
           <section className="flex items-center justify-center gap-3">
             <span className="bg-white text-black px-3 py-2 rounded font-medium transition-all duration-300 ease-linear hover:bg-neutral-300">
-              +1000 Tarefas
+              +{tasks} Tarefas
             </span>
             <span className="bg-white text-black px-3 py-2 rounded font-medium transition-all duration-300 ease-linear hover:bg-neutral-300">
-              +2000 Comentarios
+              +{comments} Comentarios
             </span>
           </section>
         </div>
@@ -43,3 +52,19 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const commentRef = collection(db, "comments");
+  const tasksRef = collection(db, "taskify");
+
+  const commentSnapshot = await getDocs(commentRef);
+  const tasksSnapshot = await getDocs(tasksRef);
+
+  return {
+    props: {
+      tasks: tasksSnapshot.size || 0,
+      comments: commentSnapshot.size || 0,
+    },
+    revalidate: 60,
+  };
+};
