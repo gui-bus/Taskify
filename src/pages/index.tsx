@@ -20,7 +20,7 @@ export default function Home({ tasks, comments }: HomeProps) {
         <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center select-none mt-10 text-center">
+      <main className="flex flex-col items-center justify-center select-none text-center">
         <div className="flex flex-col items-center justify-center">
           <Image
             className="my-2 w-64 h-auto flex"
